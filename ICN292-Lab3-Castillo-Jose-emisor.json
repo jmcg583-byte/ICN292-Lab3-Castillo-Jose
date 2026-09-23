@@ -1,0 +1,122 @@
+{
+  "name": "ICN292-Lab3-Castillo-Jose-emisor",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        0
+      ],
+      "id": "360ff8c8-fa1b-496c-ada3-207b4ee61cb9",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://j0secastillo123.app.n8n.cloud/webhook/devoluciones-378",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        336,
+        0
+      ],
+      "id": "6db535f0-d141-4339-b323-dc7ec55f1153",
+      "name": "Enviar solicitud"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "solicitudes",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        80,
+        0
+      ],
+      "id": "5a01000b-2c7f-4d95-aeeb-c7ded91315d2",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e247dcef-4540-4e23-8923-e6d0e4d5bd50",
+              "name": "solicitudes",
+              "value": "[{\"id_solicitud\":\"DEV-1115\",\"sku\":\"AU-210\",\"unidades\":\"1\",\"monto\":\"19990\",\"dias_desde_compra\":\"3\",\"estado_producto\":\"sin_abrir\",\"email_cliente\":\"cliente1@example.cl\"},{\"id_solicitud\":\"DEV-1116\",\"sku\":\"TE-330\",\"unidades\":\"2\",\"monto\":\"69980\",\"dias_desde_compra\":\"5\",\"estado_producto\":\"abierto_sin_uso\",\"email_cliente\":\"cliente2@example.cl\"},{\"id_solicitud\":\"DEV-1117\",\"sku\":\"HV-050\",\"unidades\":\"1\",\"monto\":\"24990\",\"dias_desde_compra\":\"12\",\"estado_producto\":\"con_fallas\",\"email_cliente\":\"cliente3@example.cl\"},{\"id_solicitud\":\"DEV-1118\",\"sku\":\"MW-150\",\"unidades\":\"1\",\"monto\":\"79990\",\"dias_desde_compra\":\"4\",\"estado_producto\":\"sin_abrir\",\"email_cliente\":\"cliente4@example.cl\"},{\"id_solicitud\":\"DEV-1119\",\"sku\":\"PL-120\",\"unidades\":\"1\",\"monto\":\"45990\",\"dias_desde_compra\":\"25\",\"estado_producto\":\"danado_por_uso\",\"email_cliente\":\"cliente5@example.cl\"},{\"id_solicitud\":\"DEV-1120\",\"sku\":\"AS-260\",\"unidades\":\"1\",\"monto\":\"89990\",\"dias_desde_compra\":\"2\",\"estado_producto\":\"con_fallas\",\"email_cliente\":\"cliente6@example.cl\"},{\"id_solicitud\":\"DEV-1121\",\"sku\":\"LV-330\",\"unidades\":\"1\",\"monto\":\"289990\",\"dias_desde_compra\":\"9\",\"estado_producto\":\"sin_abrir\",\"email_cliente\":\"cliente7@example.cl\"},{\"id_solicitud\":\"DEV-1122\",\"sku\":\"PL-120\",\"unidades\":\"1\",\"monto\":\"45990\",\"dias_desde_compra\":\"2\",\"estado_producto\":\"sin_abrir\",\"email_cliente\":\"cliente8@example.cl\"},{\"id_solicitud\":\"DEV-1123\",\"sku\":\"AU-210\",\"unidades\":\"2\",\"monto\":\"39980\",\"dias_desde_compra\":\"15\",\"estado_producto\":\"danado_por_uso\",\"email_cliente\":\"cliente9@example.cl\"},{\"id_solicitud\":\"DEV-1124\",\"sku\":\"HV-050\",\"unidades\":\"2\",\"monto\":\"49980\",\"dias_desde_compra\":\"1\",\"estado_producto\":\"abierto_sin_uso\",\"email_cliente\":\"cliente10@example.cl\"},{\"id_solicitud\":\"DEV-1125\",\"sku\":\"TE-330\",\"unidades\":\"1\",\"monto\":\"34990\",\"dias_desde_compra\":\"22\",\"estado_producto\":\"sin_abrir\",\"email_cliente\":\"cliente11@example.cl\"},{\"id_solicitud\":\"DEV-1126\",\"sku\":\"MW-150\",\"unidades\":\"1\",\"monto\":\"79990\",\"dias_desde_compra\":\"8\",\"estado_producto\":\"con_fallas\",\"email_cliente\":\"cliente12@example.cl\"},{\"id_solicitud\":\"DEV-C01\",\"sku\":\"CB-010\",\"unidades\":\"1\",\"monto\":\"9990\",\"dias_desde_compra\":\"1\",\"estado_producto\":\"sin_abrir\",\"email_cliente\":\"control01@example.cl\"},{\"id_solicitud\":\"DEV-C02\",\"sku\":\"LV-330\",\"unidades\":\"1\",\"monto\":\"289990\",\"dias_desde_compra\":\"2\",\"estado_producto\":\"sin_abrir\",\"email_cliente\":\"control02@example.cl\"},{\"id_solicitud\":\"DEV-C03\",\"sku\":\"MW-150\",\"unidades\":\"1\",\"monto\":\"79990\",\"dias_desde_compra\":\"29\",\"estado_producto\":\"abierto_sin_uso\",\"email_cliente\":\"control03@example.cl\"}]",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        -160,
+        0
+      ],
+      "id": "0658eca1-17a2-4d0f-92fc-144bd8ca03d8",
+      "name": "Cargar solicitudes"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Cargar solicitudes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Enviar solicitud",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cargar solicitudes": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner",
+    "availableInMCP": true
+  },
+  "versionId": "31d65d32-4bbf-42db-879a-df2ca99de877",
+  "meta": {
+    "instanceId": "71a935ce325f1c333a18cd4cd32a62887d4deda494922648f04f8f303e81654b"
+  },
+  "nodeGroups": [],
+  "id": "SAQ0nAv19YyjuqCz",
+  "tags": []
+}
